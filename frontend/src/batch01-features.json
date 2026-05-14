@@ -1,0 +1,111 @@
+{
+  "project": "AIBrowserExtensionPlatform",
+  "marker": "// === Batch 01 Gaps & Frontend Mounts ===",
+  "features": [
+    {
+      "slug": "agentic-browsing-co-pilot-that-completes-multi-tab",
+      "component": "AgenticBrowsingCoPilotThatCompletesMultiTabPage",
+      "label": "Agentic browsing co-pilot that completes multi-tab tasks (research, comparison, form-filling)",
+      "endpoint": "/api/cf-agentic-browsing-co-pilot-that-completes-multi-tab",
+      "kind": "cfs"
+    },
+    {
+      "slug": "rag-over-user-s-bookmarks-and-reading-history-for-",
+      "component": "RagOverUserSBookmarksAndReadingHistoryForPage",
+      "label": "RAG over user's bookmarks and reading history for personalized recall",
+      "endpoint": "/api/cf-rag-over-user-s-bookmarks-and-reading-history-for-",
+      "kind": "cfs"
+    },
+    {
+      "slug": "real-time-streaming-summarization-with-citations-a",
+      "component": "RealTimeStreamingSummarizationWithCitationsAPage",
+      "label": "Real-time streaming summarization with citations as user scrolls",
+      "endpoint": "/api/cf-real-time-streaming-summarization-with-citations-a",
+      "kind": "cfs"
+    },
+    {
+      "slug": "white-label-sdk-for-saas-vendors-to-embed-ai-sidek",
+      "component": "WhiteLabelSdkForSaasVendorsToEmbedAiSidekPage",
+      "label": "White-label SDK for SaaS vendors to embed AI sidekick in their web apps",
+      "endpoint": "/api/cf-white-label-sdk-for-saas-vendors-to-embed-ai-sidek",
+      "kind": "cfs"
+    },
+    {
+      "slug": "26-ai-endpoints-exist-but-only-4-frontend-pages-di",
+      "component": "Gap26AiEndpointsExistButOnly4FrontendPagesDiPage",
+      "label": "26 AI endpoints exist but only 4 frontend pages \u2014 discoverability gap",
+      "endpoint": "/api/gap-26-ai-endpoints-exist-but-only-4-frontend-pages-di",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-on-device-private-llm-option-for-sensitive-page",
+      "component": "NoOnDevicePrivateLlmOptionForSensitivePage",
+      "label": "No on-device/private LLM option for sensitive pages",
+      "endpoint": "/api/gap-no-on-device-private-llm-option-for-sensitive-page",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-ai-memory-personalization-across-sessions",
+      "component": "NoAiMemoryPersonalizationAcrossSessionsPage",
+      "label": "No AI memory/personalization across sessions",
+      "endpoint": "/api/gap-no-ai-memory-personalization-across-sessions",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-multi-tab-agentic-browsing-flows",
+      "component": "NoMultiTabAgenticBrowsingFlowsPage",
+      "label": "No multi-tab agentic browsing flows",
+      "endpoint": "/api/gap-no-multi-tab-agentic-browsing-flows",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-actual-browser-extension-build-artifact-chrome-",
+      "component": "NoActualBrowserExtensionBuildArtifactChromePage",
+      "label": "No actual browser-extension build artifact (Chrome MV3, Firefox manifests not present)",
+      "endpoint": "/api/gap-no-actual-browser-extension-build-artifact-chrome-",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-usage-analytics-quota-tracking-per-user",
+      "component": "NoUsageAnalyticsQuotaTrackingPerUserPage",
+      "label": "No usage analytics / quota tracking per user",
+      "endpoint": "/api/gap-no-usage-analytics-quota-tracking-per-user",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-subscription-billing-for-paid-tiers",
+      "component": "NoSubscriptionBillingForPaidTiersPage",
+      "label": "No subscription/billing for paid tiers",
+      "endpoint": "/api/gap-no-subscription-billing-for-paid-tiers",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-team-workspaces-or-shared-library",
+      "component": "NoTeamWorkspacesOrSharedLibraryPage",
+      "label": "No team workspaces or shared library",
+      "endpoint": "/api/gap-no-team-workspaces-or-shared-library",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-sync-across-devices",
+      "component": "NoSyncAcrossDevicesPage",
+      "label": "No sync across devices",
+      "endpoint": "/api/gap-no-sync-across-devices",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-notification-system",
+      "component": "NoNotificationSystemPage",
+      "label": "No notification system",
+      "endpoint": "/api/gap-no-notification-system",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-webhook-outbound-api",
+      "component": "NoWebhookOutboundApiPage",
+      "label": "No webhook outbound API",
+      "endpoint": "/api/gap-no-webhook-outbound-api",
+      "kind": "gap"
+    }
+  ]
+}

@@ -390,6 +390,122 @@ const Workout = sequelize.define('Workout', {
   category: { type: DataTypes.STRING }
 }, { tableName: 'workouts', timestamps: true });
 
+// ====== NEW (proposed) FEATURES ======
+
+// 1. Email Security Scanner
+const EmailScan = sequelize.define('EmailScan', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  subject: { type: DataTypes.STRING, allowNull: false },
+  sender: { type: DataTypes.STRING },
+  headers: { type: DataTypes.TEXT },
+  bodySnippet: { type: DataTypes.TEXT },
+  riskScore: { type: DataTypes.INTEGER, defaultValue: 0 },
+  riskLevel: { type: DataTypes.STRING, defaultValue: 'unknown' },
+  flags: { type: DataTypes.TEXT },
+  analysis: { type: DataTypes.TEXT },
+  status: { type: DataTypes.STRING, defaultValue: 'pending' }
+}, { tableName: 'email_scans', timestamps: true });
+
+// 2. Invoice OCR & Analysis
+const InvoiceScan = sequelize.define('InvoiceScan', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  vendor: { type: DataTypes.STRING },
+  invoiceNumber: { type: DataTypes.STRING },
+  amount: { type: DataTypes.DECIMAL(12, 2) },
+  invoiceDate: { type: DataTypes.STRING },
+  dueDate: { type: DataTypes.STRING },
+  category: { type: DataTypes.STRING },
+  rawText: { type: DataTypes.TEXT, allowNull: false },
+  extractedData: { type: DataTypes.TEXT },
+  taxDeductible: { type: DataTypes.BOOLEAN, defaultValue: false },
+  duplicateFlag: { type: DataTypes.BOOLEAN, defaultValue: false },
+  notes: { type: DataTypes.TEXT },
+  status: { type: DataTypes.STRING, defaultValue: 'pending' }
+}, { tableName: 'invoice_scans', timestamps: true });
+
+// 3. Meeting Transcription Summarizer
+const MeetingTranscript = sequelize.define('MeetingTranscript', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  title: { type: DataTypes.STRING, allowNull: false },
+  meetingDate: { type: DataTypes.STRING },
+  participants: { type: DataTypes.STRING },
+  transcript: { type: DataTypes.TEXT, allowNull: false },
+  summary: { type: DataTypes.TEXT },
+  actionItems: { type: DataTypes.TEXT },
+  decisions: { type: DataTypes.TEXT },
+  followUps: { type: DataTypes.TEXT },
+  category: { type: DataTypes.STRING },
+  status: { type: DataTypes.STRING, defaultValue: 'pending' }
+}, { tableName: 'meeting_transcripts', timestamps: true });
+
+// 4. Code Snippet Explainer
+const CodeSnippet = sequelize.define('CodeSnippet', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  title: { type: DataTypes.STRING, allowNull: false },
+  language: { type: DataTypes.STRING },
+  code: { type: DataTypes.TEXT, allowNull: false },
+  explanation: { type: DataTypes.TEXT },
+  optimizations: { type: DataTypes.TEXT },
+  securityIssues: { type: DataTypes.TEXT },
+  tags: { type: DataTypes.STRING },
+  status: { type: DataTypes.STRING, defaultValue: 'pending' }
+}, { tableName: 'code_snippets', timestamps: true });
+
+// 5. Resume Enhancement
+const ResumeReview = sequelize.define('ResumeReview', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  candidateName: { type: DataTypes.STRING },
+  targetRole: { type: DataTypes.STRING },
+  jobDescription: { type: DataTypes.TEXT },
+  resumeText: { type: DataTypes.TEXT, allowNull: false },
+  feedback: { type: DataTypes.TEXT },
+  keywords: { type: DataTypes.TEXT },
+  matchScore: { type: DataTypes.INTEGER, defaultValue: 0 },
+  status: { type: DataTypes.STRING, defaultValue: 'pending' }
+}, { tableName: 'resume_reviews', timestamps: true });
+
+// 6. Contract Review Assistant
+const ContractReview = sequelize.define('ContractReview', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  contractTitle: { type: DataTypes.STRING, allowNull: false },
+  partyName: { type: DataTypes.STRING },
+  contractType: { type: DataTypes.STRING },
+  contractText: { type: DataTypes.TEXT, allowNull: false },
+  riskyClauses: { type: DataTypes.TEXT },
+  missingProvisions: { type: DataTypes.TEXT },
+  amendments: { type: DataTypes.TEXT },
+  riskScore: { type: DataTypes.INTEGER, defaultValue: 0 },
+  status: { type: DataTypes.STRING, defaultValue: 'pending' }
+}, { tableName: 'contract_reviews', timestamps: true });
+
+// 7. Health Article Validator
+const HealthClaim = sequelize.define('HealthClaim', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  title: { type: DataTypes.STRING, allowNull: false },
+  sourceUrl: { type: DataTypes.STRING },
+  claimText: { type: DataTypes.TEXT, allowNull: false },
+  credibilityScore: { type: DataTypes.INTEGER, defaultValue: 0 },
+  rating: { type: DataTypes.STRING, defaultValue: 'unknown' },
+  validationNotes: { type: DataTypes.TEXT },
+  citedSources: { type: DataTypes.TEXT },
+  status: { type: DataTypes.STRING, defaultValue: 'pending' }
+}, { tableName: 'health_claims', timestamps: true });
+
+// 8. Competitor Price Monitor
+const CompetitorMonitor = sequelize.define('CompetitorMonitor', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  productName: { type: DataTypes.STRING, allowNull: false },
+  competitorName: { type: DataTypes.STRING },
+  competitorUrl: { type: DataTypes.STRING },
+  ourPrice: { type: DataTypes.DECIMAL(12, 2) },
+  competitorPrice: { type: DataTypes.DECIMAL(12, 2) },
+  priceHistory: { type: DataTypes.TEXT },
+  alertThreshold: { type: DataTypes.DECIMAL(5, 2) },
+  recommendation: { type: DataTypes.TEXT },
+  lastChecked: { type: DataTypes.STRING },
+  status: { type: DataTypes.STRING, defaultValue: 'monitoring' }
+}, { tableName: 'competitor_monitors', timestamps: true });
+
 module.exports = {
   sequelize,
   User,
@@ -422,5 +538,14 @@ module.exports = {
   Snippet,
   RSSFeed,
   Contact,
-  Workout
+  Workout,
+  // New proposed features
+  EmailScan,
+  InvoiceScan,
+  MeetingTranscript,
+  CodeSnippet,
+  ResumeReview,
+  ContractReview,
+  HealthClaim,
+  CompetitorMonitor
 };
