@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate, NavLink, useNavigate 
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import FeaturePage from './pages/FeaturePage';
+import Extensions from './pages/Extensions'; // Apply pass 5
+import CustomViewsPage from './pages/CustomViewsPage';
 import { featureConfigs } from './pages/featureConfigs';
 
 const navItems = [
@@ -38,6 +40,18 @@ const navItems = [
   { path: '/rss-feeds', icon: '📡', label: 'RSS Feed Reader' },
   { path: '/contacts', icon: '👤', label: 'Contact Manager' },
   { path: '/workouts', icon: '🏋️', label: 'Workout Tracker' },
+  // ===== NEW (Proposed) AI Features =====
+  { path: '/email-scans', icon: '🛡️', label: 'Email Security Scanner' },
+  { path: '/invoice-scans', icon: '🧾', label: 'Invoice OCR Analyzer' },
+  { path: '/meeting-transcripts', icon: '🎙️', label: 'Meeting Summarizer' },
+  { path: '/code-snippets', icon: '💡', label: 'Code Explainer' },
+  { path: '/resume-reviews', icon: '📄', label: 'Resume Enhancer' },
+  { path: '/contract-reviews', icon: '⚖️', label: 'Contract Reviewer' },
+  { path: '/health-claims', icon: '🩺', label: 'Health Claim Validator' },
+  { path: '/competitor-monitors', icon: '📈', label: 'Competitor Monitor' },
+  // Apply pass 5
+  { path: '/extensions', icon: '🧩', label: 'Extensions (agent / RAG / white-label)' },
+  { path: '/custom-views', icon: '📊', label: 'Extension Views' },
 ];
 
 function AppLayout({ onLogout }) {
@@ -93,6 +107,8 @@ function AppLayout({ onLogout }) {
       <main className="main-content">
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/extensions" element={<Extensions />} />{/* Apply pass 5 */}
+          <Route path="/custom-views" element={<CustomViewsPage />} />
           {Object.entries(featureConfigs).map(([key, config]) => (
             <Route
               key={key}

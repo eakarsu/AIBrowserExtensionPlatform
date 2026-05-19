@@ -34,6 +34,15 @@ const features = [
   { key: 'rss-feeds', name: 'RSS Feed Reader', icon: '📡', desc: 'Subscribe to and manage RSS feeds', color: '#ea580c', path: '/rss-feeds' },
   { key: 'contacts', name: 'Contact Manager', icon: '👤', desc: 'Store and organize your contacts', color: '#4f46e5', path: '/contacts' },
   { key: 'workouts', name: 'Workout Tracker', icon: '🏋️', desc: 'Log workouts and track fitness progress', color: '#16a34a', path: '/workouts' },
+  // New AI Features
+  { key: 'email-scans', name: 'Email Security Scanner', icon: '🛡️', desc: 'AI phishing and security scan for emails', color: '#dc2626', path: '/email-scans' },
+  { key: 'invoice-scans', name: 'Invoice OCR Analyzer', icon: '🧾', desc: 'Extract and analyze invoice data with AI', color: '#0891b2', path: '/invoice-scans' },
+  { key: 'meeting-transcripts', name: 'Meeting Summarizer', icon: '🎙️', desc: 'Summarize transcripts and extract actions', color: '#7c3aed', path: '/meeting-transcripts' },
+  { key: 'code-snippets', name: 'Code Explainer', icon: '💡', desc: 'Explain, optimize, and security-audit code', color: '#16a34a', path: '/code-snippets' },
+  { key: 'resume-reviews', name: 'Resume Enhancer', icon: '📄', desc: 'ATS optimization and keyword enhancement', color: '#d97706', path: '/resume-reviews' },
+  { key: 'contract-reviews', name: 'Contract Reviewer', icon: '⚖️', desc: 'Identify risky clauses and missing provisions', color: '#6d28d9', path: '/contract-reviews' },
+  { key: 'health-claims', name: 'Health Claim Validator', icon: '🩺', desc: 'Validate health claims against research', color: '#0284c7', path: '/health-claims' },
+  { key: 'competitor-monitors', name: 'Competitor Monitor', icon: '📈', desc: 'AI pricing strategy and competitor analysis', color: '#059669', path: '/competitor-monitors' },
 ];
 
 export default function Dashboard() {
@@ -44,12 +53,24 @@ export default function Dashboard() {
   useEffect(() => {
     features.forEach(f => {
       getAll(f.key).then(res => {
-        setCounts(prev => ({ ...prev, [f.key]: res.data.length }));
-      }).catch(() => {});
+        // Backend returns { data: [...], pagination: { total: N } }
+        const payload = res.data;
+        const count = payload?.pagination?.total ?? (Array.isArray(payload) ? payload.length : 0);
+        setCounts(prev => ({ ...prev, [f.key]: count }));
+      }).catch(() => {
+        setCounts(prev => ({ ...prev, [f.key]: 0 }));
+      });
     });
   }, []);
 
   const totalItems = Object.values(counts).reduce((a, b) => a + b, 0);
+  const aiFeatureCount = features.filter(f =>
+    ['researches','autofills','summaries','tab-groups','bookmarks','passwords','adblock-rules',
+     'reading-items','translations','screenshots','email-templates','price-trackers',
+     'grammar-checks','citations','darkmode-rules','email-scans','invoice-scans',
+     'meeting-transcripts','code-snippets','resume-reviews','contract-reviews',
+     'health-claims','competitor-monitors'].includes(f.key)
+  ).length;
 
   return (
     <div>
@@ -61,7 +82,7 @@ export default function Dashboard() {
       <div className="dashboard-stats">
         <div className="stat-card">
           <div className="stat-icon">🧩</div>
-          <div className="stat-value">30</div>
+          <div className="stat-value">{features.length}</div>
           <div className="stat-label">Active Features</div>
         </div>
         <div className="stat-card">
@@ -71,12 +92,12 @@ export default function Dashboard() {
         </div>
         <div className="stat-card">
           <div className="stat-icon">🤖</div>
-          <div className="stat-value">15</div>
-          <div className="stat-label">AI Endpoints</div>
+          <div className="stat-value">{aiFeatureCount}</div>
+          <div className="stat-label">AI Features</div>
         </div>
         <div className="stat-card">
           <div className="stat-icon">🔧</div>
-          <div className="stat-value">15</div>
+          <div className="stat-value">{features.length - aiFeatureCount}</div>
           <div className="stat-label">Utility Features</div>
         </div>
         <div className="stat-card">
