@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:3001/api';
+const API_BASE = (process.env.REACT_APP_API_BASE || 'http://localhost:3001') + '/api';
 
 const api = axios.create({
   baseURL: API_BASE,
@@ -110,5 +110,16 @@ export const extTenantsList = () => api.get('/extensions/tenants');
 export const extTenantCreate = (data) => api.post('/extensions/tenants', data);
 export const extTenantUpdate = (id, data) => api.put(`/extensions/tenants/${id}`, data);
 export const extTenantDelete = (id) => api.delete(`/extensions/tenants/${id}`);
+
+// ── Custom Views — Extension Views (install heatmap by region/version, version adoption stacked area, store-listing PDF, extension configs CRUD) ──
+export const cvInstallHeatmap = () => api.get('/custom-views/install-heatmap');
+export const cvVersionAdoption = () => api.get('/custom-views/version-adoption');
+export const cvStoreListingPdfUrl = (name = 'AI Browser Sidekick', version = '3.4.1') =>
+  `${API_BASE}/custom-views/store-listing-pdf?name=${encodeURIComponent(name)}&version=${encodeURIComponent(version)}`;
+export const cvListExtensionConfigs = () => api.get('/custom-views/extension-configs');
+export const cvGetExtensionConfig = (id) => api.get(`/custom-views/extension-configs/${id}`);
+export const cvCreateExtensionConfig = (data) => api.post('/custom-views/extension-configs', data);
+export const cvUpdateExtensionConfig = (id, data) => api.put(`/custom-views/extension-configs/${id}`, data);
+export const cvDeleteExtensionConfig = (id) => api.delete(`/custom-views/extension-configs/${id}`);
 
 export default api;

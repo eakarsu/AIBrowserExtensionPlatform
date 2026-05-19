@@ -92,6 +92,8 @@ app.use('/api/personal-recall', require('./routes/personalRecallRag')); // apply
 app.use('/api/streaming-summary', require('./routes/streamingSummary')); // apply pass 6 — audit custom suggestion
 
 app.use('/api/embed-sdk', require('./routes/embedSdkConfig')); // apply pass 6 — audit custom suggestion
+
+app.use('/api/custom-views', require('./routes/customViews')); // Extension Views — 4 synthesized endpoints
 app.listen(PORT, () => {
       console.log(`Backend server running on http://localhost:${PORT}`);
       console.log(`CORS allowed origin: ${allowedOrigin}`);

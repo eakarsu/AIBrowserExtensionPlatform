@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import FeaturePage from './pages/FeaturePage';
 import Extensions from './pages/Extensions'; // Apply pass 5
+import CustomViewsPage from './pages/CustomViewsPage';
 import { featureConfigs } from './pages/featureConfigs';
 
 const navItems = [
@@ -50,6 +51,7 @@ const navItems = [
   { path: '/competitor-monitors', icon: '📈', label: 'Competitor Monitor' },
   // Apply pass 5
   { path: '/extensions', icon: '🧩', label: 'Extensions (agent / RAG / white-label)' },
+  { path: '/custom-views', icon: '📊', label: 'Extension Views' },
 ];
 
 function AppLayout({ onLogout }) {
@@ -106,6 +108,7 @@ function AppLayout({ onLogout }) {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/extensions" element={<Extensions />} />{/* Apply pass 5 */}
+          <Route path="/custom-views" element={<CustomViewsPage />} />
           {Object.entries(featureConfigs).map(([key, config]) => (
             <Route
               key={key}
