@@ -7,6 +7,12 @@ import Extensions from './pages/Extensions'; // Apply pass 5
 import CustomViewsPage from './pages/CustomViewsPage';
 import { featureConfigs } from './pages/featureConfigs';
 
+import CodexCustomVizFeature from './pages/CodexCustomVizFeature';
+import CodexOperationsFeature from './pages/CodexOperationsFeature';
+
+import TimelineView from './pages/TimelineView';
+import PermissionRiskReview from './pages/PermissionRiskReview';
+
 const navItems = [
   { path: '/', icon: '🏠', label: 'Dashboard' },
   { path: '/researches', icon: '🔬', label: 'Research Assistant' },
@@ -52,6 +58,7 @@ const navItems = [
   // Apply pass 5
   { path: '/extensions', icon: '🧩', label: 'Extensions (agent / RAG / white-label)' },
   { path: '/custom-views', icon: '📊', label: 'Extension Views' },
+  { path: '/permission-risk', icon: '⚠️', label: 'Permission Risk Review' },
 ];
 
 function AppLayout({ onLogout }) {
@@ -106,9 +113,14 @@ function AppLayout({ onLogout }) {
 
       <main className="main-content">
         <Routes>
+        <Route path="/insights/timeline" element={<TimelineView />} />
+        <Route path="/codex/custom-viz" element={<CodexCustomVizFeature />} />
+        <Route path="/codex/operations" element={<CodexOperationsFeature />} />
+
           <Route path="/" element={<Dashboard />} />
           <Route path="/extensions" element={<Extensions />} />{/* Apply pass 5 */}
           <Route path="/custom-views" element={<CustomViewsPage />} />
+          <Route path="/permission-risk" element={<PermissionRiskReview />} />
           {Object.entries(featureConfigs).map(([key, config]) => (
             <Route
               key={key}

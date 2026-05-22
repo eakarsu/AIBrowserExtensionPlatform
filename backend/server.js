@@ -71,6 +71,7 @@ app.use('/api/user', authMiddleware, userRoutes);
 app.use('/api/bookmarks', authMiddleware, bookmarkRoutes);
 app.use('/api/summaries', authMiddleware, summaryRoutes);
 app.use('/api/extensions', authMiddleware, extensionsRoutes); // Apply pass 5
+app.use('/api/permission-risk', authMiddleware, require('./routes/permissionRiskReview'));
 
 // Health check
 app.get('/api/health', (req, res) => {
