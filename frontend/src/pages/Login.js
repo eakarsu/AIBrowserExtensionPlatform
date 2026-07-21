@@ -7,11 +7,6 @@ export default function Login({ onLogin }) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const handleAutoFill = () => {
-    setEmail('demo@aiextension.com');
-    setPassword('password123');
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -65,9 +60,6 @@ export default function Login({ onLogin }) {
           </button>
         </form>
 
-        <button className="auto-fill-btn" onClick={handleAutoFill}>
-          Quick Login - Auto-fill Demo Credentials
-        </button>
       </div>
     </div>
   );

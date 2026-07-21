@@ -14,6 +14,7 @@ const bookmarkRoutes = require('./routes/bookmarks');
 const summaryRoutes = require('./routes/summaries');
 const extensionsRoutes = require('./routes/extensions'); // Apply pass 5
 const authMiddleware = require('./middleware/auth');
+const { validateRuntime } = require('./config/runtime');
 
 const app = express();
 const PORT = process.env.BACKEND_PORT || 3001;
@@ -72,6 +73,7 @@ app.use('/api/bookmarks', authMiddleware, bookmarkRoutes);
 app.use('/api/summaries', authMiddleware, summaryRoutes);
 app.use('/api/extensions', authMiddleware, extensionsRoutes); // Apply pass 5
 app.use('/api/permission-risk', authMiddleware, require('./routes/permissionRiskReview'));
+app.use('/api/release-governance', authMiddleware, require('./routes/releaseGovernance'));
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -81,10 +83,10 @@ app.get('/api/health', (req, res) => {
 // Start server
 async function start() {
   try {
+    validateRuntime();
     await sequelize.authenticate();
     console.log('Database connected.');
-    await sequelize.sync();
-    console.log('Models synced.');
+    console.log('Database schema must be applied with scripts/migrate.sh.');
     
 app.use('/api/browsing-copilot', require('./routes/browsingCopilotAgent')); // apply pass 6 — audit custom suggestion
 
@@ -107,16 +109,3 @@ app.listen(PORT, () => {
 
 start();
 
-
-// === Batch 01 Gaps & Frontend Mounts ===
-app.use('/api/gap-26-ai-endpoints-exist-but-only-4-frontend-pages-di', require('./routes/gap_26_ai_endpoints_exist_but_only_4_frontend_pages_di'));
-app.use('/api/gap-no-on-device-private-llm-option-for-sensitive-page', require('./routes/gap_no_on_device_private_llm_option_for_sensitive_page'));
-app.use('/api/gap-no-ai-memory-personalization-across-sessions', require('./routes/gap_no_ai_memory_personalization_across_sessions'));
-app.use('/api/gap-no-multi-tab-agentic-browsing-flows', require('./routes/gap_no_multi_tab_agentic_browsing_flows'));
-app.use('/api/gap-no-actual-browser-extension-build-artifact-chrome-', require('./routes/gap_no_actual_browser_extension_build_artifact_chrome_'));
-app.use('/api/gap-no-usage-analytics-quota-tracking-per-user', require('./routes/gap_no_usage_analytics_quota_tracking_per_user'));
-app.use('/api/gap-no-subscription-billing-for-paid-tiers', require('./routes/gap_no_subscription_billing_for_paid_tiers'));
-app.use('/api/gap-no-team-workspaces-or-shared-library', require('./routes/gap_no_team_workspaces_or_shared_library'));
-app.use('/api/gap-no-sync-across-devices', require('./routes/gap_no_sync_across_devices'));
-app.use('/api/gap-no-notification-system', require('./routes/gap_no_notification_system'));
-app.use('/api/gap-no-webhook-outbound-api', require('./routes/gap_no_webhook_outbound_api'));

@@ -2,12 +2,14 @@ const bcrypt = require('bcryptjs');
 const { sequelize, User, Research, AutoFill, Summary, TabGroup, Bookmark, PasswordEntry, AdBlockRule, ReadingItem, Translation, Screenshot, EmailTemplate, PriceTracker, GrammarCheck, Citation, DarkModeRule, Note, Todo, PomodoroSession, Habit, Expense, ClipboardEntry, BlockedSite, QuickLink, SavedSession, Countdown, ColorPalette, Snippet, RSSFeed, Contact, Workout } = require('../models');
 
 async function seed() {
+  if (process.env.CONFIRM_DEMO_SEED !== 'yes' || process.env.NODE_ENV === 'production') throw new Error('Demo seed requires CONFIRM_DEMO_SEED=yes outside production');
+  if (!process.env.DEMO_PASSWORD || process.env.DEMO_PASSWORD.length < 12) throw new Error('DEMO_PASSWORD must contain at least 12 characters');
   try {
     await sequelize.sync({ force: true });
     console.log('Database synced.');
 
     // Seed Users
-    const hashedPassword = await bcrypt.hash('password123', 10);
+    const hashedPassword = await bcrypt.hash(process.env.DEMO_PASSWORD, 10);
     await User.bulkCreate([
       { email: 'admin@aiextension.com', password: hashedPassword, name: 'Admin User', role: 'admin' },
       { email: 'demo@aiextension.com', password: hashedPassword, name: 'Demo User', role: 'user' }

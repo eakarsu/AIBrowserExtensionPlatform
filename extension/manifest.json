@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Private Browser Assistant",
+  "version": "0.1.0",
+  "description": "User-invoked page assistance with local-first settings.",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "action": { "default_title": "Assist on this page" },
+  "background": { "service_worker": "background.js" },
+  "options_page": "options.html"
+}
