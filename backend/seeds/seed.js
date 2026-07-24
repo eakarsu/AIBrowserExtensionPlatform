@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const { sequelize, User, Research, AutoFill, Summary, TabGroup, Bookmark, PasswordEntry, AdBlockRule, ReadingItem, Translation, Screenshot, EmailTemplate, PriceTracker, GrammarCheck, Citation, DarkModeRule, Note, Todo, PomodoroSession, Habit, Expense, ClipboardEntry, BlockedSite, QuickLink, SavedSession, Countdown, ColorPalette, Snippet, RSSFeed, Contact, Workout } = require('../models');
 
 async function seed() {
-  if (process.env.CONFIRM_DEMO_SEED !== 'yes' || process.env.NODE_ENV === 'production') throw new Error('Demo seed requires CONFIRM_DEMO_SEED=yes outside production');
+  if (String(process.env.CONFIRM_DEMO_SEED).toLowerCase() !== 'yes' || process.env.NODE_ENV === 'production') throw new Error('Demo seed requires CONFIRM_DEMO_SEED=yes outside production');
   if (!process.env.DEMO_PASSWORD || process.env.DEMO_PASSWORD.length < 12) throw new Error('DEMO_PASSWORD must contain at least 12 characters');
   try {
     await sequelize.sync({ force: true });

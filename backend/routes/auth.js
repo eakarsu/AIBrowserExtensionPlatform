@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 const { validate, schemas } = require('../middleware/validate');
+const auth = require('../middleware/auth');
 const router = express.Router();
 
 // Login
@@ -47,6 +48,10 @@ router.post('/register', validate(schemas.register), async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+});
+
+router.get('/me', auth, (req, res) => {
+  res.json({ user: req.user });
 });
 
 module.exports = router;
