@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { login } from '../services/api';
+import { useNavigate } from 'react-router-dom';
+import { getDemoCredentials, login } from '../services/api';
 
 export default function Login({ onLogin }) {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -16,6 +18,7 @@ export default function Login({ onLogin }) {
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
       onLogin(res.data.user);
+      navigate('/', { replace: true });
     } catch (err) {
       setError(err.response?.data?.error || 'Login failed');
     } finally {
@@ -57,8 +60,16 @@ export default function Login({ onLogin }) {
           </div>
           <button
             type="button"
-            onClick={() => { setEmail(process.env.REACT_APP_DEMO_EMAIL || ''); setPassword(process.env.REACT_APP_DEMO_PASSWORD || ''); }}
-            disabled={!process.env.REACT_APP_DEMO_EMAIL || !process.env.REACT_APP_DEMO_PASSWORD}
+            onClick={async () => {
+              setError('');
+              try {
+                const response = await getDemoCredentials();
+                setEmail(response.data.email);
+                setPassword(response.data.password);
+              } catch (err) {
+                setError(err.response?.data?.error || 'Demo credentials are unavailable');
+              }
+            }}
             aria-label="Auto Fill Demo Credentials"
             style={{ width: '100%', marginBottom: '12px', padding: '10px 14px', borderRadius: '8px', border: '1px solid currentColor', background: 'transparent', cursor: 'pointer' }}
           >

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = (process.env.REACT_APP_API_BASE || 'http://localhost:3001') + '/api';
+const API_BASE = '/api';
 
 const api = axios.create({
   baseURL: API_BASE,
@@ -29,6 +29,7 @@ api.interceptors.response.use(
 
 // Auth
 export const login = (email, password) => axios.post(`${API_BASE}/auth/login`, { email, password });
+export const getDemoCredentials = () => axios.get(`${API_BASE}/auth/demo-credentials`);
 export const register = (email, password, name) => axios.post(`${API_BASE}/auth/register`, { email, password, name });
 
 // Generic CRUD — supports pagination
