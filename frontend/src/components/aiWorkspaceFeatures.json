@@ -1,0 +1,107 @@
+[
+  {
+    "name": "AgenticBrowsingCoPilotThatCompletesMultiTabPage",
+    "id": "cf-agentic-browsing-co-pilot-that-completes-multi-tab",
+    "title": "Agentic browsing co-pilot that completes multi-tab tasks (research, comparison, form-filling)",
+    "description": "Prepare a professional advisory report for agentic browsing co-pilot that completes multi-tab tasks (research, comparison, form-filling) using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "Gap26AiEndpointsExistButOnly4FrontendPagesDiPage",
+    "id": "gap-26-ai-endpoints-exist-but-only-4-frontend-pages-di",
+    "title": "26 AI endpoints exist but only 4 frontend pages — discoverability gap",
+    "description": "Prepare a professional advisory report for 26 ai endpoints exist but only 4 frontend pages — discoverability gap using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoActualBrowserExtensionBuildArtifactChromePage",
+    "id": "gap-no-actual-browser-extension-build-artifact-chrome-",
+    "title": "No actual browser-extension build artifact (Chrome MV3, Firefox manifests not present)",
+    "description": "Prepare a professional advisory report for no actual browser-extension build artifact (chrome mv3, firefox manifests not present) using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoAiMemoryPersonalizationAcrossSessionsPage",
+    "id": "gap-no-ai-memory-personalization-across-sessions",
+    "title": "No AI memory/personalization across sessions",
+    "description": "Prepare a professional advisory report for no ai memory/personalization across sessions using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoMultiTabAgenticBrowsingFlowsPage",
+    "id": "gap-no-multi-tab-agentic-browsing-flows",
+    "title": "No multi-tab agentic browsing flows",
+    "description": "Prepare a professional advisory report for no multi-tab agentic browsing flows using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoNotificationSystemPage",
+    "id": "gap-no-notification-system",
+    "title": "No notification system",
+    "description": "Prepare a professional advisory report for no notification system using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoOnDevicePrivateLlmOptionForSensitivePage",
+    "id": "gap-no-on-device-private-llm-option-for-sensitive-page",
+    "title": "No on-device/private LLM option for sensitive pages",
+    "description": "Prepare a professional advisory report for no on-device/private llm option for sensitive pages using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoSubscriptionBillingForPaidTiersPage",
+    "id": "gap-no-subscription-billing-for-paid-tiers",
+    "title": "No subscription/billing for paid tiers",
+    "description": "Prepare a professional advisory report for no subscription/billing for paid tiers using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoSyncAcrossDevicesPage",
+    "id": "gap-no-sync-across-devices",
+    "title": "No sync across devices",
+    "description": "Prepare a professional advisory report for no sync across devices using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoTeamWorkspacesOrSharedLibraryPage",
+    "id": "gap-no-team-workspaces-or-shared-library",
+    "title": "No team workspaces or shared library",
+    "description": "Prepare a professional advisory report for no team workspaces or shared library using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoUsageAnalyticsQuotaTrackingPerUserPage",
+    "id": "gap-no-usage-analytics-quota-tracking-per-user",
+    "title": "No usage analytics / quota tracking per user",
+    "description": "Prepare a professional advisory report for no usage analytics / quota tracking per user using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoWebhookOutboundApiPage",
+    "id": "gap-no-webhook-outbound-api",
+    "title": "No webhook outbound API",
+    "description": "Prepare a professional advisory report for no webhook outbound api using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "RagOverUserSBookmarksAndReadingHistoryForPage",
+    "id": "cf-rag-over-user-s-bookmarks-and-reading-history-for-",
+    "title": "RAG over user's bookmarks and reading history for personalized recall",
+    "description": "Prepare a professional advisory report for rag over user's bookmarks and reading history for personalized recall using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "RealTimeStreamingSummarizationWithCitationsAPage",
+    "id": "cf-real-time-streaming-summarization-with-citations-a",
+    "title": "Real-time streaming summarization with citations as user scrolls",
+    "description": "Prepare a professional advisory report for real-time streaming summarization with citations as user scrolls using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "WhiteLabelSdkForSaasVendorsToEmbedAiSidekPage",
+    "id": "cf-white-label-sdk-for-saas-vendors-to-embed-ai-sidek",
+    "title": "White-label SDK for SaaS vendors to embed AI sidekick in their web apps",
+    "description": "Prepare a professional advisory report for white-label sdk for saas vendors to embed ai sidekick in their web apps using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  }
+]

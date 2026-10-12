@@ -1,4 +1,5 @@
 import React from 'react';
+import { Value } from './AIReport';
 
 export default function DetailModal({ item, fields, onClose, onEdit, onDelete }) {
   if (!item) return null;
@@ -16,11 +17,7 @@ export default function DetailModal({ item, fields, onClose, onEdit, onDelete })
               <div key={f.key} className={`detail-item ${f.fullWidth ? 'full-width' : ''}`}>
                 <label>{f.label}</label>
                 <div className="value">
-                  {f.render ? f.render(item[f.key], item) : (
-                    typeof item[f.key] === 'boolean'
-                      ? (item[f.key] ? 'Yes' : 'No')
-                      : (item[f.key] || 'N/A')
-                  )}
+                  {f.render ? f.render(item[f.key], item) : <Value value={item[f.key]} />}
                 </div>
               </div>
             ))}

@@ -4,6 +4,48 @@ import { getAll, create, update, remove } from '../services/api';
 import DetailModal from '../components/DetailModal';
 import FormModal from '../components/FormModal';
 import AIResultDisplay from '../components/AIResultDisplay';
+import FullFieldPresets from '../components/FullFieldPresets';
+import { reportText, reportValue } from '../components/AIReport';
+
+const promptExamples = {
+  researches: ['Compare browser extension privacy practices for a small school.', 'Research accessible reading tools for students with dyslexia.', 'Summarize current browser extension security review practices.'],
+  autofills: ['Job application with name, email, experience, and resume text.', 'Customer support form with order number, issue, and preferred contact method.', 'Conference registration with attendee, accessibility needs, and dietary notes.'],
+  summaries: ['Our team met on Tuesday to review a two week launch. Design is complete, documentation needs review, and support training is scheduled for Friday.', 'The quarterly update reports faster response times, two open accessibility issues, and a planned customer survey.', 'A policy memo proposes a 30 day pilot, weekly feedback, and a review before expansion.'],
+  'tab-groups': ['Open tabs: project plan, issue tracker, API docs, and team chat.', 'Open tabs: train options, hotel listings, city map, and museum hours.', 'Open tabs: recipe, grocery list, nutrition guide, and cooking video.'],
+  bookmarks: ['Bookmark: Web Accessibility Initiative at https://www.w3.org/WAI/.', 'Bookmark: MDN JavaScript guide at https://developer.mozilla.org/docs/Web/JavaScript.', 'Bookmark: National Park Service at https://www.nps.gov/.'],
+  passwords: ['Review a password policy requiring 14 characters and a password manager.', 'Explain how to protect a shared account with multifactor authentication.', 'Recommend a recovery process for a lost password manager device.'],
+  'adblock-rules': ['Suggest a rule for intrusive autoplay ads on a news site.', 'Review a cosmetic rule for a persistent newsletter popup.', 'Identify how to block a third party tracking domain without breaking checkout.'],
+  'reading-items': ['Recommend introductory articles on web accessibility and inclusive design.', 'Suggest reading on browser security for a new developer.', 'Recommend practical guides to digital privacy for families.'],
+  translations: ['Translate to Spanish: Your appointment is confirmed for Tuesday at 10 am.', 'Translate to Spanish: Please send the revised document by Friday.', 'Translate to Spanish: The library will close early during the holiday.'],
+  screenshots: ['Annotate a screenshot of a checkout page with a confusing shipping field.', 'Annotate a dashboard screenshot with unreadable chart labels.', 'Annotate a mobile menu screenshot where the close button is hard to find.'],
+  'email-templates': ['Write a courteous follow up after a product demo with next steps.', 'Write a concise appointment reminder for a client.', 'Write a professional reply acknowledging a support request.'],
+  'price-trackers': ['Analyze a wireless keyboard listed at $69 with a prior price of $79.', 'Review a monitor listed at $249 and a competitor option at $229.', 'Compare a desk lamp at $45 against a typical $50 budget.'],
+  'grammar-checks': ['Please review: The team have finished their report and it are ready.', 'Please review: We was planning to launch on friday.', 'Please review: Their is three options for the client to chose.'],
+  citations: ['Cite an article titled Accessible Web Design by Alex Rivera, published in 2022.', 'Create an APA citation for a 2023 report titled Digital Inclusion by City Library.', 'Cite a book titled Practical UX Research by Morgan Lee, published in 2021.'],
+  'darkmode-rules': ['Suggest dark mode CSS for a blog with white cards and dark text.', 'Improve contrast for a dashboard with pale blue chart labels.', 'Suggest dark mode colors for a documentation site with code blocks.'],
+  'email-scans': ['Subject: Urgent account review. Please click an unfamiliar link and enter your password today.', 'Subject: Invoice update. The sender asks for payment to a new bank account without prior notice.', 'Subject: Meeting notes. A known colleague shares an ordinary document link and no payment request.'],
+  'invoice-scans': ['Invoice from North Studio dated 2026-09-30: design services $800, tax $64, total $864, due 2026-10-30.', 'Invoice from Bright Print: 200 brochures at $2 each, shipping $25, total $425.', 'Invoice from City Office: monthly workspace $350, equipment rental $40, total $390.'],
+  'meeting-transcripts': ['Alex: Documentation is ready. Priya: I will review it by Friday. Sam: Launch remains next Tuesday.', 'Mia: The pilot needs ten volunteers. Lee: I will send invitations tomorrow. Team: Review results in two weeks.', 'Nora: Support tickets increased. Omar: I will categorize them. Team: Decide on fixes at Monday meeting.'],
+  'code-snippets': ['Explain and review: function add(a, b) { return a + b; }', 'Explain and review: const unique = [...new Set(items)];', 'Explain and review: async function load(url) { const response = await fetch(url); return response.json(); }'],
+  'resume-reviews': ['Resume: Product designer with three years of experience; led accessibility audits and improved task completion.', 'Resume: Support specialist with five years of customer service and ticket triage experience.', 'Resume: Frontend developer experienced with React, testing, and performance improvements.'],
+  'contract-reviews': ['Review: The vendor will deliver the site by December 1. Payment is due on acceptance. Changes require written approval.', 'Review: The consultant will provide monthly reports. Either party may terminate with 30 days notice.', 'Review: The client owns final deliverables after payment. Confidential information remains protected for two years.'],
+  'health-claims': ['Evaluate the claim: Drinking water alone cures every headache.', 'Evaluate the claim: Regular walking may improve cardiovascular fitness.', 'Evaluate the claim: A supplement eliminates the need for all vaccines.'],
+  'competitor-monitors': ['Compare a $29 monthly plan with a competitor plan at $25 and similar features.', 'Analyze a $99 annual plan against two alternatives at $89 and $119.', 'Review a $15 entry tier with a competitor offering a free basic tier.'],
+};
+
+function aiPromptPresets(config) {
+  const examples = promptExamples[config.resource] || [
+    `Review a practical ${config.itemName.toLowerCase()} scenario and list assumptions.`,
+    `Analyze three observations relevant to ${config.itemName.toLowerCase()} and recommend next steps.`,
+    `Prepare a concise ${config.itemName.toLowerCase()} review for a small team.`,
+  ];
+  return examples.map((prompt, index) => ({ label: ['Scenario example', 'Data example', 'Review example'][index], values: { prompt } }));
+}
+
+function recordPreview(value) {
+  const text = reportText(reportValue(value)).replace(/\s+/g, ' ');
+  return text.length > 60 ? `${text.slice(0, 60)}…` : text;
+}
 
 export default function FeaturePage({ config }) {
   const navigate = useNavigate();
@@ -163,6 +205,7 @@ export default function FeaturePage({ config }) {
               <span style={{ fontSize: '18px' }}>🤖</span>
               {config.aiLabel || 'AI Assistant'}
             </h3>
+            <FullFieldPresets value={{ prompt: aiInput }} presets={aiPromptPresets(config)} disabled={aiLoading} onChange={({ prompt }) => { setAiInput(prompt); setAiResult(null); setAiParsed(null); }} />
             <div style={{ display: 'flex', gap: '12px' }}>
               <input
                 type="text"
@@ -216,7 +259,7 @@ export default function FeaturePage({ config }) {
                     {col.render ? col.render(item[col.key], item) : (
                       typeof item[col.key] === 'boolean'
                         ? <span className={`status-badge status-${item[col.key]}`}>{item[col.key] ? 'Yes' : 'No'}</span>
-                        : (String(item[col.key] || '').substring(0, 60) + (String(item[col.key] || '').length > 60 ? '...' : ''))
+                        : recordPreview(item[col.key])
                     )}
                   </td>
                 ))}

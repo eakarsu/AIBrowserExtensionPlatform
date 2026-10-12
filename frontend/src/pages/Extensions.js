@@ -2,6 +2,8 @@
 // Three tabs: Agent (multi-agent orchestration), RAG, White-label tenants.
 
 import React, { useEffect, useState } from 'react';
+import FullFieldPresets from '../components/FullFieldPresets';
+import AIReport from '../components/AIReport';
 import {
   extAgentRun, extAgentList,
   extRagIndex, extRagQuery, extRagDocs, extRagDelete,
@@ -57,24 +59,17 @@ function AgentTab() {
 
   return (
     <div>
+      <FullFieldPresets value={{ goal }} disabled={busy} presets={[
+        { label: 'Research example', values: { goal: 'Compare three accessible reading tools for a small school and summarize tradeoffs.' } },
+        { label: 'Travel example', values: { goal: 'Plan a two day museum visit in Boston with transit and a modest budget.' } },
+        { label: 'Project example', values: { goal: 'Outline a website accessibility review with tasks, owners, and a two week timeline.' } },
+      ]} onChange={({ goal: example }) => { setGoal(example); setOut(null); }} />
       <textarea value={goal} onChange={(e) => setGoal(e.target.value)} placeholder="Describe a multi-step goal" rows={3} style={{ width: '100%' }} />
       <button onClick={run} disabled={busy || !goal} className="btn primary">
         {busy ? 'Running…' : 'Run agent'}
       </button>
       {err && <div style={{ color: 'crimson' }}>{err}</div>}
-      {out && (
-        <div style={{ marginTop: 16, padding: 12, background: '#f4f4f5' }}>
-          <h3>Plan</h3>
-          <pre>{JSON.stringify(out.plan, null, 2)}</pre>
-          <h3>Steps</h3>
-          {(out.steps || []).map((s, i) => (
-            <div key={i} style={{ borderLeft: '3px solid #888', padding: 8, marginBottom: 8 }}>
-              <strong>[{s.role}]</strong> {s.task}
-              <pre style={{ whiteSpace: 'pre-wrap' }}>{s.output || s.error}</pre>
-            </div>
-          ))}
-        </div>
-      )}
+      {out && <AIReport response={{ plan: out.plan, steps: out.steps }} title="Agent plan" />}
       <h3 style={{ marginTop: 24 }}>Recent runs</h3>
       <ul>
         {list.map((r) => (
@@ -111,6 +106,11 @@ function RagTab() {
   return (
     <div>
       <h3>Index a document</h3>
+      <FullFieldPresets value={{ title, content }} presets={[
+        { label: 'Project note', values: { title: 'Launch review', content: 'Design is complete. Documentation needs review by Friday. Support training is scheduled for Monday.' } },
+        { label: 'Policy note', values: { title: 'Access policy', content: 'Staff use multifactor authentication. Access requests require manager approval and quarterly review.' } },
+        { label: 'Meeting note', values: { title: 'Customer feedback', content: 'Customers requested clearer navigation and faster search. The team will review prototypes next week.' } },
+      ]} onChange={(example) => { setTitle(example.title); setContent(example.content); }} />
       <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
       <textarea value={content} onChange={(e) => setContent(e.target.value)} placeholder="Content" rows={4} style={{ width: '100%' }} />
       <button onClick={index} className="btn primary">Index</button>
@@ -119,17 +119,15 @@ function RagTab() {
       <ul>{docs.map((d) => <li key={d.id}>{d.title || '(untitled)'} <button onClick={() => del(d.id)}>x</button></li>)}</ul>
 
       <h3 style={{ marginTop: 24 }}>Query</h3>
+      <FullFieldPresets value={{ q }} presets={[
+        { label: 'Deadline question', values: { q: 'Which work is due this week?' } },
+        { label: 'Policy question', values: { q: 'What approval is required for access?' } },
+        { label: 'Feedback question', values: { q: 'What improvements did customers request?' } },
+      ]} onChange={({ q: example }) => { setQ(example); setMatches(null); }} />
       <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Ask a question" style={{ width: '60%' }} />
       <button onClick={query} className="btn primary">Search</button>
       {err && <div style={{ color: 'crimson' }}>{err}</div>}
-      {matches && (
-        <div style={{ marginTop: 12, background: '#f4f4f5', padding: 12 }}>
-          {matches.answer && <div><h4>Answer</h4><pre style={{ whiteSpace: 'pre-wrap' }}>{matches.answer}</pre></div>}
-          <h4>Matches</h4>
-          {(matches.matches || []).map((m, i) => <div key={i}>[{m.id}] score={m.score?.toFixed(3)} • {m.title} — {m.snippet}</div>)}
-          <small>{matches.note}</small>
-        </div>
-      )}
+      {matches && <AIReport response={matches} title="Search results" />}
     </div>
   );
 }

@@ -1,3 +1,4 @@
+import AIReportLibrary from "./components/AIReportLibrary";
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, NavLink, useNavigate } from 'react-router-dom';
 import Login from './pages/Login';
@@ -109,7 +110,7 @@ function AppLayout({ onLogout }) {
             ⏻
           </button>
         </div>
-      </aside>
+      <AIReportLibrary /></aside>
 
       <main className="main-content">
         <Routes>

@@ -67,13 +67,13 @@ export default function Login({ onLogin }) {
                 setEmail(response.data.email);
                 setPassword(response.data.password);
               } catch (err) {
-                setError(err.response?.data?.error || 'Demo credentials are unavailable');
+                setError('Demo credentials are unavailable');
               }
             }}
-            aria-label="Auto Fill Demo Credentials"
+            aria-label="Fill demo credentials"
             style={{ width: '100%', marginBottom: '12px', padding: '10px 14px', borderRadius: '8px', border: '1px solid currentColor', background: 'transparent', cursor: 'pointer' }}
           >
-            Auto Fill Demo Credentials
+            Fill Demo Credentials
           </button>
           <button type="submit" className="btn btn-primary btn-full" disabled={loading}>
             {loading ? 'Signing in...' : 'Sign In'}
