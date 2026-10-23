@@ -82,6 +82,7 @@ app.get('/api/health', (req, res) => {
 
 // Start server
 
+app.use('/api/wave28c', authMiddleware, require('./routes/wave28c'));
 // Advisory AI reports only; native execution and approval routes stay unchanged.
 const aiWorkspaceSupport = require("./aiWorkspaceAdapters.cjs");
 const aiWorkspaceDatabase = aiWorkspaceSupport.sequelizeQueryClient(require("./config/database.js"));

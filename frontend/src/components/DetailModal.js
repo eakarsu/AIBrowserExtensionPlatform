@@ -6,7 +6,7 @@ export default function DetailModal({ item, fields, onClose, onEdit, onDelete })
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
+      <div className="modal-content" role="dialog" aria-modal="true" onClick={e => e.stopPropagation()}>
         <div className="modal-header">
           <h2>Item Details</h2>
           <button className="modal-close" onClick={onClose}>&times;</button>
@@ -34,7 +34,7 @@ export default function DetailModal({ item, fields, onClose, onEdit, onDelete })
         <div className="modal-footer">
           <button className="btn btn-secondary btn-sm" onClick={() => onEdit(item)}>Edit</button>
           <button className="btn btn-danger btn-sm" onClick={() => onDelete(item.id)}>Delete</button>
-          <button className="btn btn-sm" style={{ color: '#94a3b8' }} onClick={onClose}>Close</button>
+          <button className="btn btn-sm" style={{ color: '#94a3b8' }} onClick={onClose}>Cancel</button>
         </div>
       </div>
     </div>
